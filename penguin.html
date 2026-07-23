@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>I love you</title>
+    <script defer>
+        const messages = [
+            "I love you",
+            "I love you so so much",
+            "I love you more than every drop of water in every ocean in the world",
+            "I love you more than every oxygen atom in every drop of water in every ocean in the world",
+            "How is your day going?",
+            "How was your day today?",
+            "What are you doing tomorrow?",
+            "🥰❤️😘",
+            "You're the best gf in the world",
+            "Teach me about dendrites and axons",
+            "Wanna get bibimbap together?",
+            "Wanna get Raku udon together?",
+            "I miss you",
+            "I miss you so so much",
+            "my baby <3",
+            "Wise men say... Only fools rush innnn.....",
+            "gurcwnrwagkk (caesar cipher -2)",
+            "You're beautiful",
+            "You're cute",
+            "You're pretty",
+            "You're hot",
+            "You're funny",
+            "You're intelligent",
+            "You're intelligent x2",
+            "You're the best thing that ever happened to me",
+            "🐨🐨🪾🪾"
+        ]
+
+        function newWord() {
+            document.querySelector("#text").innerText = messages[Math.floor(Math.random() * messages.length)];
+        }
+    </script>
+</head>
+<body>
+    <p id="text">I love you</p>
+    <button onclick="newWord()">New message</button>
+</body>
+</html>

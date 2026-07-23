@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>I love you</title>
+    <script defer>
+        function enter() {
+            const password = document.querySelector('#code').value;
+            window.location.href = password + ".html";
+        }
+    </script>
+</head>
+<body>
+    <label for="code">Please enter password: </label><input type="password" id="code">
+    <button onclick="enter()">Submit</button>
+</body>
+</html>
