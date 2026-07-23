@@ -12,7 +12,7 @@
             "How is your day going?",
             "How was your day today?",
             "What are you doing tomorrow?",
-            "🥰❤️😘",
+            "<span class='emoji'>🥰❤️😘</span>",
             "You're the best gf in the world",
             "Teach me about dendrites and axons",
             "Wanna get bibimbap together?",
@@ -30,16 +30,51 @@
             "You're intelligent",
             "You're intelligent x2",
             "You're the best thing that ever happened to me",
-            "🐨🐨🪾🪾"
+            "<span class='emoji'>🐨🐨🪾🪾</span>"
         ]
 
         function newWord() {
-            document.querySelector("#text").innerText = messages[Math.floor(Math.random() * messages.length)];
+            document.querySelector("#text").innerHTML = messages[Math.floor(Math.random() * messages.length)];
         }
     </script>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            background: repeating-linear-gradient(
+                    45deg,
+                    #E267C4,
+                    #E267C4 20px,
+                    #FCABE8 20px,
+                    #FCABE8 40px
+            );
+            overflow: hidden;
+        }
+
+        div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            padding: 30px;
+            border-radius: 10px;
+            background: white;
+        }
+
+        button:hover {
+            transform: scale(1.2);
+        }
+
+        .emoji {
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
-    <p id="text">I love you</p>
-    <button onclick="newWord()">New message</button>
+    <div>
+        <p id="text">I love you</p>
+        <button onclick="newWord()">New message</button>
+    </div>
 </body>
 </html>

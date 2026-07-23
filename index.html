@@ -9,9 +9,43 @@
             window.location.href = password + ".html";
         }
     </script>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            background: repeating-linear-gradient(
+                    45deg,
+                    #E267C4,
+                    #E267C4 20px,
+                    #FCABE8 20px,
+                    #FCABE8 40px
+            );
+            overflow: hidden;
+        }
+
+        div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px;
+            border-radius: 10px;
+            background: white;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+
+        button:hover {
+            transform: scale(1.2);
+        }
+    </style>
 </head>
 <body>
-    <label for="code">Please enter password: </label><input type="password" id="code">
-    <button onclick="enter()">Submit</button>
+    <div>
+        <label for="code">Please enter password: </label><input type="password" id="code">
+        <button onclick="enter()">Submit</button>
+    </div>
 </body>
 </html>
