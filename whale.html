@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The perfect date</title>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            background: repeating-linear-gradient(
+                    45deg,
+                    #E267C4,
+                    #E267C4 20px,
+                    #FCABE8 20px,
+                    #FCABE8 40px
+            );
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        div {
+            width: 50vw;
+            height: 60vh;
+            padding: 30px;
+            border-radius: 10px;
+            background: white;
+            overflow-y: auto;
+            display: block;
+            text-wrap: wrap;
+        }
+
+        #choice {
+            height: 10vh;
+            display: block;
+        }
+
+        .card {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            width: fit-content;
+            height: fit-content;
+            background: #b1e2bc;
+        }
+
+        #text {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<div id="textBox">
+    <p id="text"></p>
+</div>
+<div id="choice">
+    <button id="b1"></button>
+    <button id="b2"></button>
+    <button id="b3"></button>
+</div>
+
+<script>
+    let b1 = document.querySelector("#b1");
+    let b2 = document.querySelector("#b2");
+    let b3 = document.querySelector("#b3");
+
+    function transmit() {
+        return new Promise(resolve => {
+            b1.onclick = () => {
+                resolve(1);
+                b1.textContent = "";
+                b2.textContent = "";
+                b3.textContent = "";
+            }
+
+            b2.onclick = () => {
+                resolve(2);
+                b1.textContent = "";
+                b2.textContent = "";
+                b3.textContent = "";
+            }
+
+            b3.onclick = () => {
+                resolve(3);
+                b1.textContent = "";
+                b2.textContent = "";
+                b3.textContent = "";
+            }
+        })
+    }
+
+    function write(message) {
+        return new Promise(resolve => {
+            let i = 0;
+            function nextLetter() {
+                if (i < message.length) {
+                    document.querySelector("#text").textContent += message[i];
+                    i++;
+                    if (message[i] === "." && message[i - 1] === ".") {
+                        setTimeout(nextLetter, 322);
+                    } else {
+                        setTimeout(nextLetter, 20);
+                    }
+                } else {
+                    resolve();
+                }
+            }
+            nextLetter();
+        })
+    }
+
+    function mm() {
+        return new Promise(async resolve => {
+            await write("\"Let's head to Mode Mischief! I think these will look good on you...\"\n\n");
+            let card = document.createElement("div");
+            card.classList.add("card");
+
+            let img = document.createElement("img");
+            img.src = "img/mm/mm1.png";
+
+            img.addEventListener("click", () => {
+                img.src = "img/mm/mm2.png";
+                img.addEventListener("click", () => {
+                    img.src = "img/mm/mm3.png";
+                    img.addEventListener("click", () => {
+                        img.src = "img/mm/mm4.png";
+                        img.addEventListener("click", () => {
+                            card.remove();
+                            resolve();
+                        });
+                    });
+                });
+            });
+
+            card.appendChild(img);
+            document.body.appendChild(card);
+        });
+    }
+
+    function sd() {
+        return new Promise(async resolve => {
+            await write("\"Subdued it is! I think you'll look great in these items...\"\n\n");
+            let card = document.createElement("div");
+            card.classList.add("card");
+
+            let img = document.createElement("img");
+            img.src = "img/sd/sd1.png";
+
+            img.addEventListener("click", () => {
+                img.src = "img/sd/sd2.png";
+                img.addEventListener("click", () => {
+                    img.src = "img/sd/sd3.png";
+                    img.addEventListener("click", () => {
+                        img.src = "img/sd/sd4.png";
+                        img.addEventListener("click", () => {
+                            card.remove();
+                            resolve();
+                        });
+                    });
+                });
+            });
+
+            card.appendChild(img);
+            document.body.appendChild(card);
+        });
+    }
+
+    function pp() {
+        return new Promise(async resolve => {
+            await write("\"Then we'll head to Princess Polly! These items would look great on you...\"\n\n");
+            let card = document.createElement("div");
+            card.classList.add("card");
+
+            let img = document.createElement("img");
+            img.src = "img/pp/pp1.png";
+
+            img.addEventListener("click", () => {
+                img.src = "img/pp/pp2.png";
+                img.addEventListener("click", () => {
+                    img.src = "img/pp/pp3.png";
+                    img.addEventListener("click", () => {
+                        img.src = "img/pp/pp4.png";
+                        img.addEventListener("click", () => {
+                            card.remove();
+                            resolve();
+                        });
+                    });
+                });
+            });
+
+            card.appendChild(img);
+            document.body.appendChild(card);
+        });
+    }
+
+    async function story() {
+        await write("I hear my alarm ring and I wake up from my dream. I slowly start to get up so I can turn my alarm off, but then I realize. Today isn't just a normal day that I'm waking up, today is my date with Nathan! The question is... What should I wear?\n\n")
+
+        b1.textContent = "Simple outfit";
+        b2.textContent = "Cool outfit!";
+        b3.textContent = "Cool outfit and makeup!";
+
+        const outfit = await transmit();
+
+        if (outfit === 1) {
+            await write("I decide to wear a simple outfit. No need to wear anything fancy for a simple date.\n\n");
+        } else if (outfit === 2) {
+            await write("I decide to wear a cool outfit! Nathan had better be impressed at how cool I look!\n\n");
+        } else {
+            await write("I decide to really go all out for this date! We must be going somewhere fancy!\n\n");
+        }
+
+        await write("Suddenly I hear a knock on the door and jump up from the couch. I check my phone and it's 10 am already! Have I really been doomscrolling for 2 hours? Well... knowing me, that sounds reasonable. I answer the door and Nathan's outside. ");
+
+        if (outfit === 1) {
+            await write("\"Hi baby! Are you ready to head out on our date?\" ");
+        } else if (outfit === 2) {
+            await write("\"Hi baby! You look great! Are you ready to head out on our date?\" ");
+        } else {
+            await write("\"Hi baby! You look amazing! A fancy look is perfect for where we're going today!\" ");
+        }
+
+        await write("He's holding a bouquet of assorted flowers (like he always brings me for our dates) and he hands them to me with a flourish. We interlock hands and start walking away from my house. We barely make it 10 steps before he turns to me and takes me in his arms for a hug. He kisses me on the forehead once... then twice... then many more times as I push him away, giggling. \"Where are we going today again?\" I ask him...\n\n");
+
+        b1.textContent = "A walk through the park!";
+        b2.textContent = "A shopping trip in SOHO!";
+        b3.textContent = "Lunch at Raku!";
+
+        const date1 = await transmit();
+
+        if (date1 === 1) {
+            await write("\"We're taking the Q up to my house to go on a walk through the park!\" You look down and see he's carrying a tote bag with Tupperware inside. \"Picnic?\" You ask. He answers with a kiss and takes your hand again as you walk towards the train station.\n\n");
+        } else if (date1 === 2) {
+            await write("\"We're gonna head to SOHO and shop for clothing!\" He fishes in his pocket for a second and pulls out 100$ cash. \"Is that your mom's money?\" I laugh. \"Very funny...\" He groans, \"No this is from my personal stash in my underwear drawer!\" I squeeze his hand and give him another hug.\n\n")
+        } else {
+            await write("\"I made a reservation at Raku for udon! I know exactly what we're gonna order! 1 karaage udon to share, some vegetable gyoza, an extra bowl of ric-\" \"Fatass.\" I cut him off. He pouts and I quickly apologize with an \"I love you!\" before walking towards the train station.\n\n");
+        }
+
+        await write("We start walking towards the train station, hands clasped and talking about dendrites. Nathan crosses to my other side to protect me from a stray pigeon. We reach the train station right when the train is arriving at the station. We rush to find a seat and we find one right by the door. I put his arm around my waist and snuggle up next to him. Then I pull out my phone and we start watching TikToks together. We scroll past videos of Din Tai Fung's chocolate xiao long bao and videos of the newest interestingly-flavored-coffee shops in the city. Then I pick my head up and we're at our stop already! I guess time does fly when you're having fun.\n\n");
+
+        if (date1 === 1) {
+            await write("We get out of the train station and head into the park. \"So where are we going?\" I ask. He clutches me to his side and responds, \"I'm gonna take you somewhere special.\" We meander throughout the forest for a little while before stumbling upon a grassy patch without the hustle and bustle of the more popular spaces in the park. Nathan pulls the tupperware out from his tote bag and starts arranging them on a blanket. \"I brought all of our favorites. We've got Win Son bakery over here, some grilled cheeses from our favorite movie, and some creme brulee for dessert!\"\n\nWe sit down and start eating the food together. We watch dogs playing off in the distance and admire the natural beauty all around us. Nathan spots a red-tailed hawk and points it out to me. The food tastes great and the weather is perfect. Once we finish eating, we lie down on the blanket and snuggle up to one another. \"I love you a ton.\" \"I love you more.\" We squeeze each other's hands and relax as we name each and every cloud. \"That one over there looks like a penguin!\" \"What should we name it?\" He asks me. \"This one can be Grace jr.\" \"Well then this one is Nathan jr., and mine has a cooler beak.\" \"Rude.\"\n\n");
+        } else if (date1 === 2) {
+            await write("We exit the train station and walk up the stairs. \"So which store should we hit first?\" He looks a little overwhelmed...\n\n");
+
+            b1.textContent = "Mode Mischief";
+            b2.textContent = "Subdued";
+            b3.textContent = "Princess Polly";
+
+            const store = await transmit();
+
+            if (store === 1) {
+                await mm();
+                await sd();
+                await pp();
+            } else if (store === 2) {
+                await sd();
+                await pp();
+                await mm();
+            } else {
+                await pp();
+                await mm();
+                await sd();
+            }
+        } else {
+            await write("We get out of the train and make the short walk to Raku. We got there right in time before all the people start crowding in, so we get a window table and plenty of time to eat. Nathan makes the order that he talked about on the train and we sit a talk for a little while. \"I have a little surprise for you!\" Nathan says as he reaches into his pocket. \"It's a keychain of a koala holding onto a tree! As soon as I saw it, I knew I had to give it to you.\" He hands it to me and I take a closer look. \"It has your cute face and your happy smile.\" I look at his keychain and I see a matching one. He notices me looking and says, \"Well I couldn't just buy one...\"\n\nOur food arrives and we start eating while people-watching out the window. My hand is on the table and he puts his hand on it subconsciously. I let it linger for a little but then smack it away with an, \"eww PDA...\" The food is incredible and there's nobody better to eat it with.\n\nWe head to a frozen yogurt place for dessert. Nathan squeezes dows the handle and we count, \"1...2...3...\" \"Wait stop that's too much!\" I try to say, but he goes for an extra second or so. We get passionfruit, mochi, chocolate, raspberries, mango, and all the toppings that we want. It ends up only being $13. \"I won't say I told you so but-\" \"Shut up.\"\n\n");
+        }
+
+        await write("It's the end of our date, so it's time to head back home. Nathan takes the train with me and drops me off at my house.\n\nI start going into my room and I hear my phone buzz.\n\n\"I love you!\"\n\n\"I love you too\"\n\n\"I miss you...\"\n\nYou roll your eyes but you feel a pang in your heart too...\n\n\"I miss you too\"\n\n\"See you again tmr! 🥰🥰\"\n\n\n The End.");
+    }
+
+    story();
+</script>
+</body>
+</html>
